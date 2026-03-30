@@ -1,6 +1,6 @@
 # ESP
 
-`ESP` is a RuneLite external plugin project for drawing distance overlays for:
+`ESP` is a RuneLite external plugin project for drawing distance overlays for.:
 
 - NPCs
 - bosses
