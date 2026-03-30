@@ -9,3 +9,5 @@ nb-configuration.xml
 nbproject/
 *.hprof
 *.log
+logs/
+gradle.properties

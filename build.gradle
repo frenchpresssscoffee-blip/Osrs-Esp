@@ -40,6 +40,17 @@ tasks.withType(JavaCompile).configureEach {
 tasks.register('run', JavaExec) {
 	classpath = sourceSets.test.runtimeClasspath
 	mainClass = pluginMainClass
+	doFirst {
+		def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+		def executableSuffix = isWindows ? '.exe' : ''
+		def configuredJavaHome = System.getenv('JAVA_HOME') ?: System.getProperty('java.home')
+		def configuredJava = file("${configuredJavaHome}/bin/java${executableSuffix}")
+		if (!configuredJava.exists()) {
+			throw new GradleException("The run task could not find java at ${configuredJava}. Set JAVA_HOME to a valid JDK before running the launcher.")
+		}
+
+		executable = configuredJava.absolutePath
+	}
 
 	jvmArgs "-ea", "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED"
 	args "--insecure-write-credentials"
